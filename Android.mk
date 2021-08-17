@@ -75,8 +75,14 @@ LOCAL_SRC_FILES := \
     openrecoveryscript.cpp \
     tarWrite.c \
     twrpAdbBuFifo.cpp \
-    twrpApex.cpp \
     twrpRepacker.cpp
+
+
+ifeq ($(TW_EXCLUDE_APEX),)
+    LOCAL_SRC_FILES += twrpApex.cpp
+else
+    LOCAL_CFLAGS += -DTW_EXCLUDE_APEX
+endif
 
 LOCAL_STATIC_LIBRARIES += libavb libtwrpinstall
 LOCAL_SHARED_LIBRARIES += libfs_mgr libinit
